@@ -1,0 +1,39 @@
+plugins {
+	id 'org.springframework.boot' version '2.4.4'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+}
+
+group = 'com.students'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+repositories {
+	mavenCentral()
+}
+
+ext {
+	set('solaceSpringBootVersion', "1.1.0")
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'com.solace.spring.boot:solace-spring-boot-starter'
+	implementation 'org.apache.camel.springboot:camel-spring-boot-starter:3.7.0'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation group: 'org.apache.camel', name: 'camel-http', version: '3.7.0'
+    implementation group: 'org.apache.camel', name: 'camel-bindy', version: '3.7.0'
+	compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.20'
+
+
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "com.solace.spring.boot:solace-spring-boot-bom:${solaceSpringBootVersion}"
+	}
+}
+
+test {
+	useJUnitPlatform()
+}
