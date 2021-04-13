@@ -14,11 +14,11 @@ public class Student {
     @DataField(pos = 3)
     private int varsta;
 
-    public Student(int id, String prenume, int varsta) {
-        this.id = id;
-        this.prenume = prenume;
-        this.varsta = varsta;
-    }
+//    public Student(int id, String prenume, int varsta) {
+//        this.id = id;
+//        this.prenume = prenume;
+//        this.varsta = varsta;
+//    }
 
     public int getId() {
         return id;

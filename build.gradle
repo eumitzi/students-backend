@@ -18,16 +18,16 @@ ext {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'com.solace.spring.boot:solace-spring-boot-starter'
-	implementation 'org.apache.camel.springboot:camel-spring-boot-starter:3.7.0'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation group: 'org.apache.camel', name: 'camel-http', version: '3.7.0'
-    implementation group: 'org.apache.camel', name: 'camel-bindy', version: '3.7.0'
-	compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.20'
-	implementation group: 'org.apache.camel', name: 'camel-core', version: '3.7.0'
-	implementation group: 'org.apache.camel', name: 'camel-jdbc', version: '3.7.0'
-	implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.22'
 	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-jdbc', version: '2.4.1'
+	implementation 'com.solace.spring.boot:solace-spring-boot-starter'
+	implementation 'org.apache.camel.springboot:camel-spring-boot-starter:3.7.1'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation group: 'org.apache.camel', name: 'camel-bindy', version: '3.7.1'
+	compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.20'
+	implementation group: 'org.apache.camel', name: 'camel-core', version: '3.7.1'
+//	implementation group: 'org.apache.camel', name: 'camel-jdbc', version: '3.7.1'
+	implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.22'
+
 
 }
 
