@@ -1,3 +1,3 @@
 id,prenume,varsta
-55,Mihaela,25
-65,Denisa,24
+7,Mihaela,25
+5,Denisa,24
