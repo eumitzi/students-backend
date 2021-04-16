@@ -42,7 +42,7 @@ public class StudentsRoute extends RouteBuilder {
                 .to("log:?level=INFO&showBody=true&showHeaders=true")
                 .process(insertIntoCicluStudiuProcessor)
                 .to("log:Successfully inserted into the database")
-               // .process(insertIntoAnUniversitarProcessor)
+                .process(insertIntoAnUniversitarProcessor)
                 .to("log:Successfully inserted into the database")
                 .process(insertIntoAnStudiuProcessor)
                 .to("log:Successfully inserted into the database");
