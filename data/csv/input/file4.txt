@@ -1,3 +1,7 @@
-id,prenume,varsta
-7,Mihaela,25
-5,Denisa,24
+id_an_studiu,an_studiu,id_ciclu_studiu,data_inceput,data_sfarsit,id_an_universitar,an_universitar,tip_an_universitar,tip_ciclu_studiu
+1,1,1,21.09.2020,04.07.2021,1,2020,2020-2021,licenta
+2,2,1,21.09.2020,04.07.2021,1,2020,2020-2021,licenta
+3,3,1,21.09.2020,04.07.2021,1,2020,2020-2021,licenta
+4,4,1,21.09.2020,04.07.2021,1,2020,2020-2021,licenta
+5,1,2,21.09.2020,18.06.2021,2,2020,2020-2021,masterat
+6,2,2,21.09.2020,18.06.2021,2,2020,2020-2021,masterat
