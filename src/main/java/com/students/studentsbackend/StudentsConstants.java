@@ -13,4 +13,14 @@ public class StudentsConstants {
     public static String INSERT_INTO_PROGRAME_STUDIU =
             "INSERT INTO programe_studiu(id_programe_studiu,detaliu_program_studiu,id_ciclu_studiu) VALUES (?,?,?)";
 
+    public static String INSERT_INTO_DISCIPLINA_GENERAL = "INSERT INTO discipline_general(id_disciplina, nume) VALUES (?,?)";
+    public static String INSERT_INTO_INSTANTA_DISCIPLINA =
+            "INSERT INTO instanta_disciplina(id_instanta_disciplina, id_disciplina, id_profesor, id_an_universitar, numar_credite, semestru) VALUES (?,?,?,?,?,?)";
+
+    public static String INSERT_INTO_TIP_PERSOANE =
+            "INSERT INTO tip_persoane(id_tip_persoane, tip_persoane) VALUES (?,?)";
+
+    public static String INSERT_INTO_PERSOANE =
+            "INSERT INTO persoane(id_persoana, id_tip_persoana, nume_persoana, pronume_persoana, adresa) VALUES (?,?,?,?,?)";
+
 }
