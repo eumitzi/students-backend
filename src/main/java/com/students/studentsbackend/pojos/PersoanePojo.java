@@ -1,5 +1,7 @@
 package com.students.studentsbackend.pojos;
 
+import java.util.Objects;
+
 public class PersoanePojo {
     private int id_persoana;
     private int id_tip_persoana;
@@ -57,6 +59,23 @@ public class PersoanePojo {
 
     public void setAdresa(String adresa) {
         this.adresa = adresa;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PersoanePojo that = (PersoanePojo) o;
+        return id_persoana == that.id_persoana &&
+                id_tip_persoana == that.id_tip_persoana &&
+                nume.equals(that.nume) &&
+                prenume.equals(that.prenume) &&
+                adresa.equals(that.adresa);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id_persoana, id_tip_persoana, nume, prenume, adresa);
     }
 }
 

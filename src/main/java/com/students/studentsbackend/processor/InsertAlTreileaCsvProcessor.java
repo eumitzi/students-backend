@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -28,7 +29,7 @@ public class InsertAlTreileaCsvProcessor implements Processor {
   }
 
   @Override
-  public void process(Exchange exchange) throws Exception {
+  public void process(Exchange exchange) {
 
     ArrayList<AlTreileaCSV> exchangeBody = exchange.getIn().getBody(ArrayList.class);
     ArrayList<DisciplinaGeneralPojo> disciplinaGeneralPojos = new ArrayList<>();
@@ -53,7 +54,7 @@ public class InsertAlTreileaCsvProcessor implements Processor {
       persoanePojo.setId_persoana(alTreileaCSV.getId_persoana());
       persoanePojo.setAdresa(alTreileaCSV.getAdresa());
       persoanePojo.setId_tip_persoana(alTreileaCSV.getId_tip_persoane());
-      persoanePojo.setNume(alTreileaCSV.getNume());
+      persoanePojo.setNume(alTreileaCSV.getNume_persoana());
       persoanePojo.setPrenume(alTreileaCSV.getPrenume_persoana());
       persoanePojos.add(persoanePojo);
     }
@@ -64,34 +65,39 @@ public class InsertAlTreileaCsvProcessor implements Processor {
         new ArrayList<>(new HashSet<>(tipPersoanePojos));
     List<PersoanePojo> persoaneFaraDuplicate = new ArrayList<>(new HashSet<>(persoanePojos));
 
-    final Connection connection = dataSource.getConnection();
-    for (DisciplinaGeneralPojo disciplinaGeneralPojo : disciplinaGeneralFaraDuplicate) {
-      try (PreparedStatement statement =
-          connection.prepareStatement(StudentsConstants.INSERT_INTO_DISCIPLINA_GENERAL)) {
-        statement.setInt(1, disciplinaGeneralPojo.getId_disciplina());
-        statement.setString(2, disciplinaGeneralPojo.getNume());
-        statement.executeUpdate();
+    try{
+      final Connection connection = dataSource.getConnection();
+      for (DisciplinaGeneralPojo disciplinaGeneralPojo : disciplinaGeneralFaraDuplicate) {
+        try (PreparedStatement statement =
+                     connection.prepareStatement(StudentsConstants.INSERT_INTO_DISCIPLINA_GENERAL)) {
+          statement.setInt(1, disciplinaGeneralPojo.getId_disciplina());
+          statement.setString(2, disciplinaGeneralPojo.getNume());
+          statement.executeUpdate();
+        }
       }
-    }
 
-    for (TipPersoanePojo tipPersoanePojo : tipPersoaneFaraDuplicate) {
-      try (PreparedStatement statement =
-          connection.prepareStatement(StudentsConstants.INSERT_INTO_TIP_PERSOANE)) {
-        statement.setInt(1, tipPersoanePojo.getId_tip_persoane());
-        statement.setString(2, tipPersoanePojo.getTip_persoane());
-        statement.executeUpdate();
+      for (TipPersoanePojo tipPersoanePojo : tipPersoaneFaraDuplicate) {
+        try (PreparedStatement statement =
+            connection.prepareStatement(StudentsConstants.INSERT_INTO_TIP_PERSOANE)) {
+          statement.setInt(1, tipPersoanePojo.getId_tip_persoane());
+          statement.setString(2, tipPersoanePojo.getTip_persoane());
+          statement.executeUpdate();
+        }
       }
-    }
-    for (PersoanePojo persoanePojo : persoaneFaraDuplicate) {
-      try (PreparedStatement statement =
-          connection.prepareStatement(StudentsConstants.INSERT_INTO_PERSOANE)) {
-        statement.setInt(1, persoanePojo.getId_persoana());
-        statement.setInt(2, persoanePojo.getId_tip_persoana());
-        statement.setString(3, persoanePojo.getNume());
-        statement.setString(4, persoanePojo.getPrenume());
-        statement.setString(5, persoanePojo.getAdresa());
-        statement.executeUpdate();
+
+      for (PersoanePojo persoanePojo : persoaneFaraDuplicate) {
+        try (PreparedStatement statement =
+            connection.prepareStatement(StudentsConstants.INSERT_INTO_PERSOANE)) {
+          statement.setInt(1, persoanePojo.getId_persoana());
+          statement.setInt(2, persoanePojo.getId_tip_persoana());
+          statement.setString(3, persoanePojo.getNume());
+          statement.setString(4, persoanePojo.getPrenume());
+          statement.setString(5, persoanePojo.getAdresa());
+          statement.executeUpdate();
+        }
       }
+    } catch (SQLException e){
+      System.out.println(e.getMessage());
     }
   }
 }

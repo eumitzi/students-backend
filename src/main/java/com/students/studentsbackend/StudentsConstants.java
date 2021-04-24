@@ -21,6 +21,6 @@ public class StudentsConstants {
             "INSERT INTO tip_persoane(id_tip_persoane, tip_persoane) VALUES (?,?)";
 
     public static String INSERT_INTO_PERSOANE =
-            "INSERT INTO persoane(id_persoana, id_tip_persoana, nume_persoana, pronume_persoana, adresa) VALUES (?,?,?,?,?)";
+            "INSERT INTO persoane(id_persoana, id_tip_persoana, nume_persoana, prenume_persoana, adresa) VALUES (?,?,?,?,?)";
 
 }

@@ -7,8 +7,6 @@ import com.students.studentsbackend.domain.PrimulCSV;
 import com.students.studentsbackend.processor.InsertAlDoileaCsvProcessor;
 import com.students.studentsbackend.processor.InsertAlTreileaCsvProcessor;
 import com.students.studentsbackend.processor.InsertPrimulCsvProcessor;
-import org.apache.camel.Exchange;
-import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.dataformat.bindy.csv.BindyCsvDataFormat;
 import org.apache.camel.spi.DataFormat;
@@ -57,7 +55,7 @@ public class StudentsRoute extends RouteBuilder {
     from(sourceUriPrimulCsv)
         .unmarshal(bindy)
         .to("log:?level=INFO&showBody=true&showHeaders=true")
-        // .process(insertPrimulCsvProcessor)
+        .process(insertPrimulCsvProcessor)
         .to("log:Informatiile despre anul de studiu au fost inserate cu succes!")
         .end();
 
@@ -65,10 +63,6 @@ public class StudentsRoute extends RouteBuilder {
         .unmarshal(bindyCsv3)
         .to("log:?level=INFO&showBody=true&showHeaders=true")
         .process(insertAlTreileaCsvProcessor)
-        .process(
-            exchange -> {
-              int a = 0;
-            })
         .to("log:Informatiile despre persoane si disc au fost inserate cu succes!")
         .end();
   }
