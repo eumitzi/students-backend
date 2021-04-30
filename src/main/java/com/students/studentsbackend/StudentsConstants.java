@@ -23,4 +23,7 @@ public class StudentsConstants {
     public static String INSERT_INTO_PERSOANE =
             "INSERT INTO persoane(id_persoana, id_tip_persoana, nume_persoana, prenume_persoana, adresa) VALUES (?,?,?,?,?)";
 
+    public static String INSERT_INTO_PERIOADA_SEMESTRU =
+            "INSERT INTO perioada_semestru(id_perioada_sem, numar_semestru, id_an_studiu, data_inceput, data_sfarsit) VALUES (?,?,?,?,?)";
+
 }

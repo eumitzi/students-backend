@@ -11,6 +11,15 @@ public class StudentsConfig {
     private String fileName;
     private String fileNameCsv2;
     private String fileNameCSV3;
+    private String perioadaSemestruCsv;
+    public String getPerioadaSemestruCsv() {
+        return perioadaSemestruCsv;
+    }
+
+    public void setPerioadaSemestruCsv(String perioadaSemestruCsv) {
+        this.perioadaSemestruCsv = perioadaSemestruCsv;
+    }
+
 
     public String getFileName() {
         return fileName;

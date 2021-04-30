@@ -64,7 +64,7 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `disertatie`.`discipline_general`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `disertatie`.`discipline_general` ;
+DROP TABLE IF EXISTS `dizertatie`.`discipline_general` ;
 
 CREATE  TABLE IF NOT EXISTS `dizertatie`.`discipline_general` (
   `id_disciplina` INT(11) NOT NULL AUTO_INCREMENT,
@@ -73,10 +73,9 @@ CREATE  TABLE IF NOT EXISTS `dizertatie`.`discipline_general` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-
 -- -----------------------------------------------------
 -- Table `dizertatie`.`tip_persoane`
--- -----------------------------------------------------
+-- ---------------------------------------------------knote_activitate--
 DROP TABLE IF EXISTS `dizertatie`.`tip_persoane` ;
 
 CREATE  TABLE IF NOT EXISTS `dizertatie`.`tip_persoane` (
@@ -308,7 +307,7 @@ DROP TABLE IF EXISTS `dizertatie`.`perioada_semestru` ;
 
 CREATE  TABLE IF NOT EXISTS `dizertatie`.`perioada_semestru` (
   `id_perioada_sem` INT(11) NOT NULL AUTO_INCREMENT,
-  `numar_semestru` INT(1) NULL DEFAULT NULL ,
+  `numar_semestru` VARCHAR(11) NULL DEFAULT NULL ,
   `id_an_studiu` INT(11) NULL DEFAULT NULL ,
   `data_inceput` DATE NULL DEFAULT NULL ,
   `data_sfarsit` DATE NULL DEFAULT NULL ,
