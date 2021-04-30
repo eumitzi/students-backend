@@ -33,6 +33,12 @@ public class PrimulCSV {
     @DataField(pos = 9)
     private String tip_ciclu_studiu;
 
+    @DataField(pos = 10)
+    private int id_prg_studiu;
+
+    @DataField(pos = 11)
+    private String detaliu;
+
     public int getId_an_studiu() {
         return id_an_studiu;
     }
@@ -103,5 +109,21 @@ public class PrimulCSV {
 
     public void setTip_ciclu_studiu(String tip_ciclu_studiu) {
         this.tip_ciclu_studiu = tip_ciclu_studiu;
+    }
+
+    public int getId_prg_studiu() {
+        return id_prg_studiu;
+    }
+
+    public void setId_prg_studiu(int id_prg_studiu) {
+        this.id_prg_studiu = id_prg_studiu;
+    }
+
+    public String getDetaliu() {
+        return detaliu;
+    }
+
+    public void setDetaliu(String detaliu) {
+        this.detaliu = detaliu;
     }
 }

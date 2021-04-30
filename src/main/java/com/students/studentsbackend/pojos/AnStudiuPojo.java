@@ -10,7 +10,7 @@ public class AnStudiuPojo {
     private String data_inceput;
     private String data_sfarsit;
     private int id_ciclu_studiu;
-    private int id_an_universitar;;
+    private int id_an_universitar;
 
     public AnStudiuPojo(int id_an_studiu, int an_studiu, String data_inceput, String data_sfarsit, int id_ciclu_studiu, int id_an_universitar) {
         this.id_an_studiu = id_an_studiu;
