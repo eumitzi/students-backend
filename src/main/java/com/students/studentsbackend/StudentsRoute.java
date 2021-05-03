@@ -73,7 +73,7 @@ public class StudentsRoute extends RouteBuilder {
 
     String sourceUriInstantaDisciplinaCSV =
             MessageFormat.format(
-                    "file:{0}?fileName={1}&noop=true&initialDelay=50000",
+                    "file:{0}?fileName={1}&noop=true&initialDelay=100000",
                     studentsConfig.getSourceDirectory(), studentsConfig.getInstantaDisciplinaCsv());
 
     String sourceUriStudentProfesorCsv =
