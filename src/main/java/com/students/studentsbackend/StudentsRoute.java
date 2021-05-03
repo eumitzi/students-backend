@@ -1,14 +1,8 @@
 package com.students.studentsbackend;
 
 import com.students.studentsbackend.config.StudentsConfig;
-import com.students.studentsbackend.domain.AlDoileaCsv;
-import com.students.studentsbackend.domain.AlTreileaCSV;
-import com.students.studentsbackend.domain.PerioadaSemestruCsv;
-import com.students.studentsbackend.domain.PrimulCSV;
-import com.students.studentsbackend.processor.InsertAlDoileaCsvProcessor;
-import com.students.studentsbackend.processor.InsertAlTreileaCsvProcessor;
-import com.students.studentsbackend.processor.InsertIntoPerioadaSemestruProcessor;
-import com.students.studentsbackend.processor.InsertPrimulCsvProcessor;
+import com.students.studentsbackend.domain.*;
+import com.students.studentsbackend.processor.*;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
@@ -26,22 +20,28 @@ public class StudentsRoute extends RouteBuilder {
   private InsertAlDoileaCsvProcessor insertAlDoileaCsvProcessor;
   private InsertAlTreileaCsvProcessor insertAlTreileaCsvProcessor;
   private InsertIntoPerioadaSemestruProcessor insertIntoPerioadaSemestruProcessor;
+  private InsertStudentProfesorProcessor insertStudentProfesorProcessor;
+
   private static final DataFormat bindyCsv2 = new BindyCsvDataFormat(AlDoileaCsv.class);
   private static final DataFormat bindyCsv3 = new BindyCsvDataFormat(AlTreileaCSV.class);
   private static final DataFormat bindy = new BindyCsvDataFormat(PrimulCSV.class);
   private static final DataFormat perioadaSemestruBindy =
       new BindyCsvDataFormat(PerioadaSemestruCsv.class);
+  private static final DataFormat studentProfesorBindy =
+      new BindyCsvDataFormat(StudentProfesorCSV.class);
 
   public StudentsRoute(
       InsertPrimulCsvProcessor insertPrimulCsvProcessor,
       InsertAlDoileaCsvProcessor insertAlDoileaCsvProcessor,
       InsertAlTreileaCsvProcessor insertAlTreileaCsvProcessor,
       InsertIntoPerioadaSemestruProcessor insertIntoPerioadaSemestruProcessor,
+      InsertStudentProfesorProcessor insertStudentProfesorProcessor,
       StudentsConfig studentsConfig) {
     this.insertPrimulCsvProcessor = insertPrimulCsvProcessor;
     this.insertAlDoileaCsvProcessor = insertAlDoileaCsvProcessor;
     this.insertAlTreileaCsvProcessor = insertAlTreileaCsvProcessor;
     this.insertIntoPerioadaSemestruProcessor = insertIntoPerioadaSemestruProcessor;
+    this.insertStudentProfesorProcessor = insertStudentProfesorProcessor;
     this.studentsConfig = studentsConfig;
   }
 
@@ -63,8 +63,13 @@ public class StudentsRoute extends RouteBuilder {
 
     String sourceUriPerioadaSemestruCsv =
         MessageFormat.format(
-            "file:{0}?fileName={1}&noop=true&initialDelay=50000",
+            "file:{0}?fileName={1}&noop=true&initialDelay=30000",
             studentsConfig.getSourceDirectory(), studentsConfig.getPerioadaSemestruCsv());
+
+    String sourceUriStudentProfesorCsv =
+        MessageFormat.format(
+            "file:{0}?fileName={1}&noop=true&initialDelay=60000",
+            studentsConfig.getSourceDirectory(), studentsConfig.getStudentProfesorCsv());
 
     from(sourceUriPrimulCsv)
         .unmarshal(bindy)
@@ -84,7 +89,14 @@ public class StudentsRoute extends RouteBuilder {
         .unmarshal(perioadaSemestruBindy)
         .to("log:?level=INFO&showBody=true&showHeaders=true")
         .process(insertIntoPerioadaSemestruProcessor)
-        .to("log:Informatiile despre PERIOADA STUDIU inserate cu succes!")
+        .to("log:Informatiile despre perioada studiu inserate cu succes!")
+        .end();
+
+    from(sourceUriStudentProfesorCsv)
+        .unmarshal(studentProfesorBindy)
+        .to("log:?level=INFO&showBody=true&showHeaders=true")
+        .process(insertStudentProfesorProcessor)
+        .to("log:Informatiile despre studenti si profesor inserate cu succes!")
         .end();
   }
 }
