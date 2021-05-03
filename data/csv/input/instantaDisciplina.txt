@@ -1,0 +1,5 @@
+id_instanta_disciplina,id_disciplina,id_profesor,id_an_universitar,numar_credite,semestru,id_student,factor_k
+1,1,1,2,4,2,1,0.2
+2,2,3,1,4,1,1,0.2
+3,3,2,2,4,1,2,0.2
+4,4,4,1,4,1,2,0.5

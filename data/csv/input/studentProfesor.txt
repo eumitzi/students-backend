@@ -1,0 +1,5 @@
+id_profesori,id_persoana,id_student,nr_matricol,id_persoana_stud
+1,1,1,LM032,2
+2,1,1,LM032,2
+3,3,2,LM735,4
+4,5,2,LM735,4

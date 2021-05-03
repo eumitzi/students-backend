@@ -53,7 +53,7 @@ public class InsertAlTreileaCsvProcessor implements Processor {
       PersoanePojo persoanePojo = new PersoanePojo();
       persoanePojo.setId_persoana(alTreileaCSV.getId_persoana());
       persoanePojo.setAdresa(alTreileaCSV.getAdresa());
-      persoanePojo.setId_tip_persoana(alTreileaCSV.getId_tip_persoane());
+      persoanePojo.setId_tip_persoana(alTreileaCSV.getId_tip_pers());
       persoanePojo.setNume(alTreileaCSV.getNume_persoana());
       persoanePojo.setPrenume(alTreileaCSV.getPrenume_persoana());
       persoanePojos.add(persoanePojo);

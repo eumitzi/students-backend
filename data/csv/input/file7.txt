@@ -1,6 +1,6 @@
-id_disciplina,nume,id_tip_persoane,tip_persoane,id_persoane,nume_persoana,prenume_persoana,adresa
-1,Programarea Concurenta,1,profesor,1,Dan,Ana,Str Pomiculturii bl 5
-2,Programarea Calculatoarelor,2,student,2,Matei,Denisa,Str Traian bl 3 sc2
-3,Arhitectura Calculatoarelor,2,student,3,Popescu,Viorica,Str Rozelor bl 14 ap 4
-4,Teoria Sistemelor1,2,student,4,Mates,Daniel,Str Ion Creanga bl 7 ap 19
-5,Teoria Sistemelor2,2,student,5,Mates,Daniel,Str Ion Creanga bl 7 ap 19
+id_disciplina,nume,id_tip_persoane,tip_persoane,id_persoane,id_tip_pers,nume_persoana,prenume_persoana,adresa
+1,Programarea Concurenta,1,profesor,1,1,Dan,Ana,Str Pomiculturii bl5
+2,Programarea Calculatoarelor,2,student,2,2,Matei,Denisa,Str Traian bl3 sc2
+3,Arhitectura Calculatoarelor,2,student,3,1,Popescu,Viorica,Str Rozelor bl4 ap4
+4,Teoria Sistemelor1,2,student,4,2,Mates,Daniel,str Ion Creanga bl7 ap19
+5,Teoria Sistemelor2,2,student,5,1,Pop,Jeorjeta,Str Mihai Viteazu ap 22
