@@ -15,7 +15,7 @@ public class StudentsConstants {
 
     public static String INSERT_INTO_DISCIPLINA_GENERAL = "INSERT INTO discipline_general(id_disciplina, nume) VALUES (?,?)";
     public static String INSERT_INTO_INSTANTA_DISCIPLINA =
-            "INSERT INTO instanta_disciplina(id_instanta_disciplina, id_disciplina, id_profesor, id_an_universitar, numar_credite, semestru) VALUES (?,?,?,?,?,?)";
+            "INSERT INTO instanta_disciplina(id_instanta_disciplina, id_disciplina, id_profesor, id_an_universitar, numar_credite, semestru, id_student, factor_k) VALUES (?,?,?,?,?,?,?,?)";
 
     public static String INSERT_INTO_TIP_PERSOANE =
             "INSERT INTO tip_persoane(id_tip_persoane, tip_persoane) VALUES (?,?)";

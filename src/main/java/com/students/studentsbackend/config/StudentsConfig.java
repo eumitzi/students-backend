@@ -1,10 +1,13 @@
 package com.students.studentsbackend.config;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @ConfigurationProperties("routeuri")
+
 public class StudentsConfig {
 
     private String sourceDirectory;
@@ -12,6 +15,7 @@ public class StudentsConfig {
     private String fileNameCsv2;
     private String fileNameCSV3;
     private String perioadaSemestruCsv;
+    private String instantaDisciplinaCsv;
     public String getPerioadaSemestruCsv() {
         return perioadaSemestruCsv;
     }
@@ -51,5 +55,14 @@ public class StudentsConfig {
 
     public void setFileNameCSV3(String fileNameCSV3) {
         this.fileNameCSV3 = fileNameCSV3;
+    }
+
+
+    public String getInstantaDisciplinaCsv() {
+        return instantaDisciplinaCsv;
+    }
+
+    public void setInstantaDisciplinaCsv(String instantaDisciplinaCsv) {
+        this.instantaDisciplinaCsv = instantaDisciplinaCsv;
     }
 }

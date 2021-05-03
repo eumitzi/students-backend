@@ -44,7 +44,7 @@ public class InsertAlDoileaCsvProcessor implements Processor {
       instantaDisciplinaPojo.setId_an_universitar(alDoileaCsv.getId_an_universitar());
       instantaDisciplinaPojo.setId_disciplina(alDoileaCsv.getId_disciplina());
       instantaDisciplinaPojo.setId_profesor(alDoileaCsv.getId_profesor());
-      instantaDisciplinaPojo.setNr_credite(alDoileaCsv.getNr_credite());
+      instantaDisciplinaPojo.setNumar_credite(alDoileaCsv.getNr_credite());
       instantaDisciplinaPojo.setSemestru(alDoileaCsv.getSemestru());
       instantaDisciplinaPojos.add(instantaDisciplinaPojo);
     }
@@ -71,7 +71,7 @@ public class InsertAlDoileaCsvProcessor implements Processor {
         statement.setInt(2, instantaDisciplinaPojo.getId_disciplina());
         statement.setInt(3, instantaDisciplinaPojo.getId_profesor());
         statement.setInt(4, instantaDisciplinaPojo.getId_an_universitar());
-        statement.setInt(5, instantaDisciplinaPojo.getNr_credite());
+        statement.setInt(5, instantaDisciplinaPojo.getNumar_credite());
         statement.setInt(6, instantaDisciplinaPojo.getSemestru());
         statement.executeUpdate();
       }
