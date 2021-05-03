@@ -23,13 +23,24 @@ public class AlTreileaCSV {
     @DataField(pos = 5)
     private int id_persoana;
 
+    public int getId_tip_pers() {
+        return id_tip_pers;
+    }
+
+    public void setId_tip_pers(int id_tip_pers) {
+        this.id_tip_pers = id_tip_pers;
+    }
+
     @DataField(pos = 6)
-    private String nume_persoana;
+    private int id_tip_pers;
 
     @DataField(pos = 7)
-    private String prenume_persoana;
+    private String nume_persoana;
 
     @DataField(pos = 8)
+    private String prenume_persoana;
+
+    @DataField(pos = 9)
     private String adresa;
 
     public int getId_disciplina() {

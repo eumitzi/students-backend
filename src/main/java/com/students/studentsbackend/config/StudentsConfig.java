@@ -16,6 +16,8 @@ public class StudentsConfig {
     private String fileNameCSV3;
     private String perioadaSemestruCsv;
     private String instantaDisciplinaCsv;
+    private String studentProfesorCsv;
+
     public String getPerioadaSemestruCsv() {
         return perioadaSemestruCsv;
     }
@@ -64,5 +66,13 @@ public class StudentsConfig {
 
     public void setInstantaDisciplinaCsv(String instantaDisciplinaCsv) {
         this.instantaDisciplinaCsv = instantaDisciplinaCsv;
+    }
+
+    public String getStudentProfesorCsv() {
+        return studentProfesorCsv;
+    }
+
+    public void setStudentProfesorCsv(String studentProfesorCsv) {
+        this.studentProfesorCsv = studentProfesorCsv;
     }
 }

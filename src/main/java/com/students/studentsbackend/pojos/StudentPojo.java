@@ -1,9 +1,14 @@
 package com.students.studentsbackend.pojos;
 
+import java.util.Objects;
+
 public class StudentPojo {
     private int id_student;
     private String nr_matricol;
-    private int id_persoana;
+
+    public StudentPojo(){
+
+    }
 
     public StudentPojo(int id_student, String nr_matricol, int id_persoana) {
         this.id_student = id_student;
@@ -33,5 +38,22 @@ public class StudentPojo {
 
     public void setId_persoana(int id_persoana) {
         this.id_persoana = id_persoana;
+    }
+
+    private int id_persoana;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        StudentPojo that = (StudentPojo) o;
+        return id_student == that.id_student &&
+                id_persoana == that.id_persoana &&
+                nr_matricol.equals(that.nr_matricol);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id_student, nr_matricol, id_persoana);
     }
 }
