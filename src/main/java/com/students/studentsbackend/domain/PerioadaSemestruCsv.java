@@ -13,12 +13,9 @@ public class PerioadaSemestruCsv {
   private int numar_semestru;
 
   @DataField(pos = 3)
-  private int id_an_studiu;
-
-  @DataField(pos = 4)
   private String data_inceput;
 
-  @DataField(pos = 5)
+  @DataField(pos = 4)
   private String data_sfarsit;
 
   public int getId_perioada_semestru() {
@@ -27,14 +24,6 @@ public class PerioadaSemestruCsv {
 
   public void setId_perioada_semestru(int id_perioada_semestru) {
     this.id_perioada_semestru = id_perioada_semestru;
-  }
-
-  public int getId_an_studiu() {
-    return id_an_studiu;
-  }
-
-  public void setId_an_studiu(int id_an_studiu) {
-    this.id_an_studiu = id_an_studiu;
   }
 
   public String getData_inceput() {
