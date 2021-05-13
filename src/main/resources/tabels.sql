@@ -2,6 +2,7 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
+DROP SCHEMA IF EXISTS `disertatie` ;
 CREATE SCHEMA IF NOT EXISTS `disertatie` DEFAULT CHARACTER SET utf8 ;
 USE `disertatie` ;
 
@@ -55,6 +56,147 @@ CREATE  TABLE IF NOT EXISTS `disertatie`.`an_studiu` (
   CONSTRAINT `id_ciclu_studiu`
     FOREIGN KEY (`id_ciclu_studiu` )
     REFERENCES `disertatie`.`ciclu_studiu` (`id_ciclu_studiu` )
+    ON DELETE NO ACTION
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `disertatie`.`anstd_ciclustd`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `disertatie`.`anstd_ciclustd` ;
+
+CREATE  TABLE IF NOT EXISTS `disertatie`.`anstd_ciclustd` (
+  `id_an_studiu` INT(11) NOT NULL ,
+  `id_ciclu_studiu` INT(11) NOT NULL ,
+  PRIMARY KEY (`id_an_studiu`, `id_ciclu_studiu`) ,
+  INDEX `id_anstd_ascs_idx` (`id_an_studiu` ASC) ,
+  INDEX `id_ciclustd_ascs_idx` (`id_ciclu_studiu` ASC) ,
+  CONSTRAINT `id_anstd_ascs`
+    FOREIGN KEY (`id_an_studiu` )
+    REFERENCES `disertatie`.`an_studiu` (`id_an_studiu` )
+    ON DELETE NO ACTION
+    ON UPDATE CASCADE,
+  CONSTRAINT `id_ciclustd_ascs`
+    FOREIGN KEY (`id_ciclu_studiu` )
+    REFERENCES `disertatie`.`ciclu_studiu` (`id_ciclu_studiu` )
+    ON DELETE NO ACTION
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `disertatie`.`perioada_semestru`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `disertatie`.`perioada_semestru` ;
+
+CREATE  TABLE IF NOT EXISTS `disertatie`.`perioada_semestru` (
+  `id_perioada_sem` INT(11) NOT NULL ,
+  `numar_semestru` INT(1) NULL DEFAULT NULL ,
+  `id_an_studiu` INT(11) NULL DEFAULT NULL ,
+  `data_inceput` DATE NULL DEFAULT NULL ,
+  `data_sfarsit` DATE NULL DEFAULT NULL ,
+  PRIMARY KEY (`id_perioada_sem`) ,
+  INDEX `id_an_studiu_persem_idx` (`id_an_studiu` ASC) ,
+  CONSTRAINT `id_an_studiu_persem`
+    FOREIGN KEY (`id_an_studiu` )
+    REFERENCES `disertatie`.`an_studiu` (`id_an_studiu` )
+    ON DELETE NO ACTION
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `disertatie`.`anstd_persem`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `disertatie`.`anstd_persem` ;
+
+CREATE  TABLE IF NOT EXISTS `disertatie`.`anstd_persem` (
+  `id_an_studiu` INT(11) NOT NULL ,
+  `id_perioada_sem` INT(11) NOT NULL ,
+  PRIMARY KEY (`id_an_studiu`, `id_perioada_sem`) ,
+  INDEX `id_persem_asps_idx` (`id_perioada_sem` ASC) ,
+  INDEX `id_anstd_asps_idx` (`id_an_studiu` ASC) ,
+  CONSTRAINT `id_anstd_asps`
+    FOREIGN KEY (`id_an_studiu` )
+    REFERENCES `disertatie`.`an_studiu` (`id_an_studiu` )
+    ON DELETE NO ACTION
+    ON UPDATE CASCADE,
+  CONSTRAINT `id_persem_asps`
+    FOREIGN KEY (`id_perioada_sem` )
+    REFERENCES `disertatie`.`perioada_semestru` (`id_perioada_sem` )
+    ON DELETE NO ACTION
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `disertatie`.`anstudiu_ciclustd`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `disertatie`.`anstudiu_ciclustd` ;
+
+CREATE  TABLE IF NOT EXISTS `disertatie`.`anstudiu_ciclustd` (
+  `id_an_studiu` INT(11) NOT NULL ,
+  `id_ciclu_studiu` INT(11) NOT NULL ,
+  PRIMARY KEY (`id_an_studiu`, `id_ciclu_studiu`) ,
+  INDEX `id_ciclustd_ascs_idx` (`id_ciclu_studiu` ASC) ,
+  CONSTRAINT `id_anstd_ascs_idx`
+    FOREIGN KEY (`id_an_studiu` )
+    REFERENCES `disertatie`.`an_studiu` (`id_an_studiu` )
+    ON DELETE RESTRICT
+    ON UPDATE RESTRICT,
+  CONSTRAINT `id_ciclustd_ascs_idx`
+    FOREIGN KEY (`id_ciclu_studiu` )
+    REFERENCES `disertatie`.`ciclu_studiu` (`id_ciclu_studiu` )
+    ON DELETE RESTRICT
+    ON UPDATE RESTRICT)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `disertatie`.`programe_studiu`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `disertatie`.`programe_studiu` ;
+
+CREATE  TABLE IF NOT EXISTS `disertatie`.`programe_studiu` (
+  `id_programe_studiu` INT(11) NOT NULL ,
+  `detaliu_program_studiu` VARCHAR(15) NULL DEFAULT NULL ,
+  `id_ciclu_studiu` INT(11) NULL DEFAULT NULL ,
+  PRIMARY KEY (`id_programe_studiu`) ,
+  INDEX `id_ciclu_studiu_prgstd_idx` (`id_ciclu_studiu` ASC) ,
+  CONSTRAINT `id_ciclu_studiu_prgstd`
+    FOREIGN KEY (`id_ciclu_studiu` )
+    REFERENCES `disertatie`.`ciclu_studiu` (`id_ciclu_studiu` )
+    ON DELETE NO ACTION
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `disertatie`.`ciclustd_prgstd`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `disertatie`.`ciclustd_prgstd` ;
+
+CREATE  TABLE IF NOT EXISTS `disertatie`.`ciclustd_prgstd` (
+  `id_ciclu_studiu` INT(11) NOT NULL ,
+  `id_programe_studiu` INT(11) NOT NULL ,
+  PRIMARY KEY (`id_ciclu_studiu`, `id_programe_studiu`) ,
+  INDEX `id_ciclustd_csps_idx` (`id_ciclu_studiu` ASC) ,
+  INDEX `id_prgstd_csps_idx` (`id_programe_studiu` ASC) ,
+  CONSTRAINT `id_ciclustd_csps`
+    FOREIGN KEY (`id_ciclu_studiu` )
+    REFERENCES `disertatie`.`ciclu_studiu` (`id_ciclu_studiu` )
+    ON DELETE NO ACTION
+    ON UPDATE CASCADE,
+  CONSTRAINT `id_prgstd_csps`
+    FOREIGN KEY (`id_programe_studiu` )
+    REFERENCES `disertatie`.`programe_studiu` (`id_programe_studiu` )
     ON DELETE NO ACTION
     ON UPDATE CASCADE)
 ENGINE = InnoDB
@@ -157,6 +299,7 @@ CREATE  TABLE IF NOT EXISTS `disertatie`.`instanta_disciplina` (
   `id_instanta_disciplina` INT(11) NOT NULL ,
   `id_disciplina` INT(11) NULL DEFAULT NULL ,
   `id_profesor` INT(11) NULL DEFAULT NULL ,
+  `id_an_studiu` INT(11) NULL DEFAULT NULL ,
   `id_an_universitar` INT(11) NULL DEFAULT NULL ,
   `numar_credite` INT(2) NULL DEFAULT NULL ,
   `semestru` INT(11) NULL DEFAULT NULL ,
@@ -167,6 +310,12 @@ CREATE  TABLE IF NOT EXISTS `disertatie`.`instanta_disciplina` (
   INDEX `id_profesor_id_idx` (`id_profesor` ASC) ,
   INDEX `id_an_univ_id_idx` (`id_an_universitar` ASC) ,
   INDEX `id_student_id_idx` (`id_student` ASC) ,
+  INDEX `id_an_studiu_id_idx` (`id_an_studiu` ASC) ,
+  CONSTRAINT `id_an_studiu_id`
+    FOREIGN KEY (`id_an_studiu` )
+    REFERENCES `disertatie`.`an_studiu` (`id_an_studiu` )
+    ON DELETE NO ACTION
+    ON UPDATE CASCADE,
   CONSTRAINT `id_an_univ_id`
     FOREIGN KEY (`id_an_universitar` )
     REFERENCES `disertatie`.`an_universitar` (`id_an_universitar` )
@@ -312,41 +461,24 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `disertatie`.`perioada_semestru`
+-- Table `disertatie`.`prof_instdisc`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `disertatie`.`perioada_semestru` ;
+DROP TABLE IF EXISTS `disertatie`.`prof_instdisc` ;
 
-CREATE  TABLE IF NOT EXISTS `disertatie`.`perioada_semestru` (
-  `id_perioada_sem` INT(11) NOT NULL ,
-  `numar_semestru` INT(1) NULL DEFAULT NULL ,
-  `id_an_studiu` INT(11) NULL DEFAULT NULL ,
-  `data_inceput` DATE NULL DEFAULT NULL ,
-  `data_sfarsit` DATE NULL DEFAULT NULL ,
-  PRIMARY KEY (`id_perioada_sem`) ,
-  INDEX `id_an_studiu_persem_idx` (`id_an_studiu` ASC) ,
-  CONSTRAINT `id_an_studiu_persem`
-    FOREIGN KEY (`id_an_studiu` )
-    REFERENCES `disertatie`.`an_studiu` (`id_an_studiu` )
+CREATE  TABLE IF NOT EXISTS `disertatie`.`prof_instdisc` (
+  `id_profesor` INT(11) NOT NULL ,
+  `id_instanta_disciplina` INT(11) NOT NULL ,
+  PRIMARY KEY (`id_profesor`, `id_instanta_disciplina`) ,
+  INDEX `id_profesor_pid_idx` (`id_profesor` ASC) ,
+  INDEX `id_instdisc_pid_idx` (`id_instanta_disciplina` ASC) ,
+  CONSTRAINT `id_instdisc_pid`
+    FOREIGN KEY (`id_instanta_disciplina` )
+    REFERENCES `disertatie`.`instanta_disciplina` (`id_instanta_disciplina` )
     ON DELETE NO ACTION
-    ON UPDATE CASCADE)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
-
--- -----------------------------------------------------
--- Table `disertatie`.`programe_studiu`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `disertatie`.`programe_studiu` ;
-
-CREATE  TABLE IF NOT EXISTS `disertatie`.`programe_studiu` (
-  `id_programe_studiu` INT(11) NOT NULL ,
-  `detaliu_program_studiu` VARCHAR(15) NULL DEFAULT NULL ,
-  `id_ciclu_studiu` INT(11) NULL DEFAULT NULL ,
-  PRIMARY KEY (`id_programe_studiu`) ,
-  INDEX `id_ciclu_studiu_prgstd_idx` (`id_ciclu_studiu` ASC) ,
-  CONSTRAINT `id_ciclu_studiu_prgstd`
-    FOREIGN KEY (`id_ciclu_studiu` )
-    REFERENCES `disertatie`.`ciclu_studiu` (`id_ciclu_studiu` )
+    ON UPDATE CASCADE,
+  CONSTRAINT `id_profesor_pid`
+    FOREIGN KEY (`id_profesor` )
+    REFERENCES `disertatie`.`profesori` (`id_profesori` )
     ON DELETE NO ACTION
     ON UPDATE CASCADE)
 ENGINE = InnoDB
