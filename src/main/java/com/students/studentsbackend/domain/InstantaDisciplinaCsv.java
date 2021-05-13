@@ -1,9 +1,7 @@
 package com.students.studentsbackend.domain;
 
-import lombok.*;
 import org.apache.camel.dataformat.bindy.annotation.CsvRecord;
 import org.apache.camel.dataformat.bindy.annotation.DataField;
-
 
 @CsvRecord( separator = ",",skipFirstLine=true)
 public class InstantaDisciplinaCsv {
@@ -15,7 +13,7 @@ public class InstantaDisciplinaCsv {
     private int id_disciplina;
 
     @DataField(pos = 3)
-    private int id_profesor;
+    private int id_an_studiu;
 
     @DataField(pos = 4)
     private int id_an_universitar;
@@ -28,6 +26,14 @@ public class InstantaDisciplinaCsv {
 
     @DataField(pos = 7)
     private int id_student;
+
+    public int getId_an_studiu() {
+        return id_an_studiu;
+    }
+
+    public void setId_an_studiu(int id_an_studiu) {
+        this.id_an_studiu = id_an_studiu;
+    }
 
     @DataField(pos = 8)
     private double factor_k;
@@ -46,14 +52,6 @@ public class InstantaDisciplinaCsv {
 
     public void setId_disciplina(int id_disciplina) {
         this.id_disciplina = id_disciplina;
-    }
-
-    public int getId_profesor() {
-        return id_profesor;
-    }
-
-    public void setId_profesor(int id_profesor) {
-        this.id_profesor = id_profesor;
     }
 
     public int getId_an_universitar() {

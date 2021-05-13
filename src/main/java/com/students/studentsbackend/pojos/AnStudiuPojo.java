@@ -2,22 +2,19 @@ package com.students.studentsbackend.pojos;
 
 import java.util.Objects;
 
-// TODO: 4/16/2021 replace getters and setters with lombok
 public class AnStudiuPojo {
 
     private int id_an_studiu;
     private int an_studiu;
     private String data_inceput;
     private String data_sfarsit;
-    private int id_ciclu_studiu;
     private int id_an_universitar;
 
-    public AnStudiuPojo(int id_an_studiu, int an_studiu, String data_inceput, String data_sfarsit, int id_ciclu_studiu, int id_an_universitar) {
+    public AnStudiuPojo(int id_an_studiu, int an_studiu, String data_inceput, String data_sfarsit, int id_an_universitar) {
         this.id_an_studiu = id_an_studiu;
         this.an_studiu = an_studiu;
         this.data_inceput = data_inceput;
         this.data_sfarsit = data_sfarsit;
-        this.id_ciclu_studiu = id_ciclu_studiu;
         this.id_an_universitar = id_an_universitar;
     }
 
@@ -57,20 +54,19 @@ public class AnStudiuPojo {
         this.data_sfarsit = data_sfarsit;
     }
 
-    public int getId_ciclu_studiu() {
-        return id_ciclu_studiu;
-    }
-
-    public void setId_ciclu_studiu(int id_ciclu_studiu) {
-        this.id_ciclu_studiu = id_ciclu_studiu;
+    @Override
+    public String toString() {
+        return "AnStudiuPojo{" +
+                "id_an_studiu=" + id_an_studiu +
+                ", an_studiu=" + an_studiu +
+                ", data_inceput='" + data_inceput + '\'' +
+                ", data_sfarsit='" + data_sfarsit + '\'' +
+                ", id_an_universitar=" + id_an_universitar +
+                '}';
     }
 
     public int getId_an_universitar() {
         return id_an_universitar;
-    }
-
-    public void setId_an_universitar(int id_an_universitar) {
-        this.id_an_universitar = id_an_universitar;
     }
 
     @Override
@@ -80,7 +76,6 @@ public class AnStudiuPojo {
         AnStudiuPojo that = (AnStudiuPojo) o;
         return id_an_studiu == that.id_an_studiu &&
                 an_studiu == that.an_studiu &&
-                id_ciclu_studiu == that.id_ciclu_studiu &&
                 id_an_universitar == that.id_an_universitar &&
                 data_inceput.equals(that.data_inceput) &&
                 data_sfarsit.equals(that.data_sfarsit);
@@ -88,6 +83,12 @@ public class AnStudiuPojo {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id_an_studiu, an_studiu, data_inceput, data_sfarsit, id_ciclu_studiu, id_an_universitar);
+        return Objects.hash(id_an_studiu, an_studiu, data_inceput, data_sfarsit, id_an_universitar);
     }
+
+    public void setId_an_universitar(int id_an_universitar) {
+        this.id_an_universitar = id_an_universitar;
+    }
+
+
 }

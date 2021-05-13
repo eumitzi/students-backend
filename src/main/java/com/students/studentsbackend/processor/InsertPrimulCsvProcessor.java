@@ -42,7 +42,6 @@ public class InsertPrimulCsvProcessor implements Processor {
       anStudiuPojo.setData_inceput(primulCSV.getData_inceput());
       anStudiuPojo.setData_sfarsit(primulCSV.getData_sfarsit());
       anStudiuPojo.setId_an_studiu(primulCSV.getId_an_studiu());
-      anStudiuPojo.setId_ciclu_studiu(primulCSV.getId_ciclu_studiu());
       anStudiuPojo.setId_an_universitar(primulCSV.getId_an_universitar());
       anStudiuPojos.add(anStudiuPojo);
 
@@ -61,7 +60,6 @@ public class InsertPrimulCsvProcessor implements Processor {
 
       // programe studiu
       ProgramaStudiuPojo programaStudiuPojo = new ProgramaStudiuPojo();
-      programaStudiuPojo.setId_ciclu_studiu(primulCSV.getId_ciclu_studiu());
       programaStudiuPojo.setId_prg_studiu(primulCSV.getId_prg_studiu());
       programaStudiuPojo.setDetaliu(primulCSV.getDetaliu());
       programeStudiuPojos.add(programaStudiuPojo);
@@ -98,7 +96,6 @@ public class InsertPrimulCsvProcessor implements Processor {
                    connection.prepareStatement(StudentsConstants.INSERT_INTO_PROGRAME_STUDIU)) {
         statement.setInt(1, programaStudiuPojo.getId_prg_studiu());
         statement.setString(2, programaStudiuPojo.getDetaliu());
-        statement.setInt(3, programaStudiuPojo.getId_ciclu_studiu());
         statement.executeUpdate();
       }
     }
@@ -108,10 +105,9 @@ public class InsertPrimulCsvProcessor implements Processor {
           connection.prepareStatement(StudentsConstants.INSERT_INTO_AN_STUDIU)) {
         statement.setInt(1, anStudiuPojo.getId_an_studiu());
         statement.setInt(2, anStudiuPojo.getAn_studiu());
-        statement.setInt(3, anStudiuPojo.getId_ciclu_studiu());
-        statement.setString(4, anStudiuPojo.getData_inceput());
-        statement.setString(5, anStudiuPojo.getData_sfarsit());
-        statement.setInt(6, anStudiuPojo.getId_an_universitar());
+        statement.setString(3, anStudiuPojo.getData_inceput());
+        statement.setString(4, anStudiuPojo.getData_sfarsit());
+        statement.setInt(5, anStudiuPojo.getId_an_universitar());
         statement.executeUpdate();
       }
     }
