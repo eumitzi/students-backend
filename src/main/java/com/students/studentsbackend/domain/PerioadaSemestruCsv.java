@@ -18,6 +18,17 @@ public class PerioadaSemestruCsv {
   @DataField(pos = 4)
   private String data_sfarsit;
 
+  @DataField(pos = 5)
+  private int id_an_studiu;
+
+  public int getId_an_studiu() {
+    return id_an_studiu;
+  }
+
+  public void setId_an_studiu(int id_an_studiu) {
+    this.id_an_studiu = id_an_studiu;
+  }
+
   public int getId_perioada_semestru() {
     return id_perioada_semestru;
   }

@@ -83,35 +83,30 @@ public class StudentsRoute extends RouteBuilder {
 
     from(sourceUriPrimulCsv)
         .unmarshal(bindy)
-        .to("log:?level=INFO&showBody=true&showHeaders=true")
         .process(insertPrimulCsvProcessor)
         .to("log:Informatiile despre anul de studiu au fost inserate cu succes!")
         .end();
 
     from(sourceUriAlTreileaCsv)
         .unmarshal(bindyCsv3)
-        .to("log:?level=INFO&showBody=true&showHeaders=true")
         .process(insertAlTreileaCsvProcessor)
         .to("log:Informatiile despre persoane si disc au fost inserate cu succes!")
         .end();
 
     from(sourceUriPerioadaSemestruCsv)
         .unmarshal(perioadaSemestruBindy)
-        .to("log:?level=INFO&showBody=true&showHeaders=true")
         .process(insertIntoPerioadaSemestruProcessor)
         .to("log:Informatiile despre perioada studiu inserate cu succes!")
         .end();
 
     from(sourceUriStudentProfesorCsv)
         .unmarshal(studentProfesorBindy)
-        .to("log:?level=INFO&showBody=true&showHeaders=true")
         .process(insertStudentProfesorProcessor)
         .to("log:Informatiile despre studenti si profesor inserate cu succes!")
         .end();
 
     from(sourceUriInstantaDisciplinaCSV)
             .unmarshal(instantaDisciplinaBindy)
-            .to("log:?level=INFO&showBody=true&showHeaders=true")
             .process(insertIntoInstantaDisciplinaCsvProcessor)
             .to("log:Informatiile despre INSTANTA DISCIPLINA inserate cu succes!")
             .end();

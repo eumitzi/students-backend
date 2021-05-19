@@ -13,6 +13,16 @@ public class InstantaDisciplinaPojo {
   private int id_student;
   private double factor_k;
 
+  public int getId_profesor() {
+    return id_profesor;
+  }
+
+  public void setId_profesor(int id_profesor) {
+    this.id_profesor = id_profesor;
+  }
+
+  private int id_profesor;
+
   public InstantaDisciplinaPojo() {}
 
   public int getId_an_studiu() {
@@ -54,30 +64,32 @@ public class InstantaDisciplinaPojo {
             ", semestru=" + semestru +
             ", id_student=" + id_student +
             ", factor_k=" + factor_k +
+            ", id_profesor=" + id_profesor +
             '}';
   }
 
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+    if (!(o instanceof InstantaDisciplinaPojo)) return false;
     InstantaDisciplinaPojo that = (InstantaDisciplinaPojo) o;
-    return id_instanta_disciplina == that.id_instanta_disciplina &&
-            id_disciplina == that.id_disciplina &&
-            id_an_studiu == that.id_an_studiu &&
-            id_an_universitar == that.id_an_universitar &&
-            numar_credite == that.numar_credite &&
-            semestru == that.semestru &&
-            id_student == that.id_student &&
-            Double.compare(that.factor_k, factor_k) == 0;
+    return getId_instanta_disciplina() == that.getId_instanta_disciplina() &&
+            getId_disciplina() == that.getId_disciplina() &&
+            getId_an_studiu() == that.getId_an_studiu() &&
+            getId_an_universitar() == that.getId_an_universitar() &&
+            getNumar_credite() == that.getNumar_credite() &&
+            getSemestru() == that.getSemestru() &&
+            getId_student() == that.getId_student() &&
+            Double.compare(that.getFactor_k(), getFactor_k()) == 0 &&
+            getId_profesor() == that.getId_profesor();
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id_instanta_disciplina, id_disciplina, id_an_studiu, id_an_universitar, numar_credite, semestru, id_student, factor_k);
+    return Objects.hash(getId_instanta_disciplina(), getId_disciplina(), getId_an_studiu(), getId_an_universitar(), getNumar_credite(), getSemestru(), getId_student(), getFactor_k(), getId_profesor());
   }
 
-  public InstantaDisciplinaPojo(int id_instanta_disciplina, int id_disciplina, int id_an_studiu, int id_an_universitar, int numar_credite, int semestru, int id_student, double factor_k) {
+  public InstantaDisciplinaPojo(int id_instanta_disciplina, int id_disciplina, int id_an_studiu, int id_an_universitar, int numar_credite, int semestru, int id_student, double factor_k, int id_profesor) {
     this.id_instanta_disciplina = id_instanta_disciplina;
     this.id_disciplina = id_disciplina;
     this.id_an_studiu = id_an_studiu;
@@ -86,6 +98,7 @@ public class InstantaDisciplinaPojo {
     this.semestru = semestru;
     this.id_student = id_student;
     this.factor_k = factor_k;
+    this.id_profesor = id_profesor;
   }
 
   public void setId_an_universitar(int id_an_universitar) {

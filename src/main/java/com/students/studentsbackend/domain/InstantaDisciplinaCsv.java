@@ -27,6 +27,24 @@ public class InstantaDisciplinaCsv {
     @DataField(pos = 7)
     private int id_student;
 
+    @DataField(pos = 8)
+    private double factor_k;
+
+    @DataField(pos = 9)
+    private int id_profesor;
+
+    public void setFactor_k(int factor_k) {
+        this.factor_k = factor_k;
+    }
+
+    public int getId_profesor() {
+        return id_profesor;
+    }
+
+    public void setId_profesor(int id_profesor) {
+        this.id_profesor = id_profesor;
+    }
+
     public int getId_an_studiu() {
         return id_an_studiu;
     }
@@ -34,9 +52,6 @@ public class InstantaDisciplinaCsv {
     public void setId_an_studiu(int id_an_studiu) {
         this.id_an_studiu = id_an_studiu;
     }
-
-    @DataField(pos = 8)
-    private double factor_k;
 
     public int getId_instanta_disciplina() {
         return id_instanta_disciplina;
