@@ -42,6 +42,7 @@ public class InsertIntoInstantaDisciplinaCsvProcessor implements Processor {
       instantaDisciplinaPojo.setSemestru(instantaDisciplinaCsv.getSemestru());
       instantaDisciplinaPojo.setId_student(instantaDisciplinaCsv.getId_student());
       instantaDisciplinaPojo.setFactor_k(instantaDisciplinaCsv.getFactor_k());
+      instantaDisciplinaPojo.setId_profesor(instantaDisciplinaCsv.getId_profesor());
 
       InstantaDisciplinaPojos.add(instantaDisciplinaPojo);
     }
@@ -57,11 +58,12 @@ public class InsertIntoInstantaDisciplinaCsvProcessor implements Processor {
         statement.setInt(1, instantaDisciplinaPojo.getId_instanta_disciplina());
         statement.setInt(2, instantaDisciplinaPojo.getId_disciplina());
         statement.setInt(3, instantaDisciplinaPojo.getId_an_studiu());
-        statement.setInt(4, instantaDisciplinaPojo.getId_an_universitar());
-        statement.setInt(5, instantaDisciplinaPojo.getNumar_credite());
-        statement.setInt(6, instantaDisciplinaPojo.getSemestru());
-        statement.setInt(7, instantaDisciplinaPojo.getId_student());
-        statement.setDouble(8, instantaDisciplinaPojo.getFactor_k());
+        statement.setInt(4, instantaDisciplinaPojo.getId_profesor());
+        statement.setInt(5, instantaDisciplinaPojo.getId_an_universitar());
+        statement.setInt(6, instantaDisciplinaPojo.getNumar_credite());
+        statement.setInt(7, instantaDisciplinaPojo.getSemestru());
+        statement.setInt(8, instantaDisciplinaPojo.getId_student());
+        statement.setDouble(9, instantaDisciplinaPojo.getFactor_k());
         statement.executeUpdate();
       }
     }

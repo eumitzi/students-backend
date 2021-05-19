@@ -33,8 +33,9 @@ public class InsertIntoPerioadaSemestruProcessor implements Processor {
           connection.prepareStatement(StudentsConstants.INSERT_INTO_PERIOADA_SEMESTRU)) {
         statement.setInt(1, perioadaSemestruCsv.getId_perioada_semestru());
         statement.setInt(2, perioadaSemestruCsv.getNumar_semestru());
-        statement.setString(3, perioadaSemestruCsv.getData_inceput());
-        statement.setString(4, perioadaSemestruCsv.getData_sfarsit());
+        statement.setInt(3, perioadaSemestruCsv.getId_an_studiu());
+        statement.setString(4, perioadaSemestruCsv.getData_inceput());
+        statement.setString(5, perioadaSemestruCsv.getData_sfarsit());
         statement.executeUpdate();
       }
     }
