@@ -1,7 +1,5 @@
 package com.students.studentsbackend.config;
 
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
@@ -12,7 +10,7 @@ public class StudentsConfig {
 
     private String sourceDirectory;
     private String fileName;
-    private String fileNameCsv2;
+    private String noteCsv;
     private String fileNameCSV3;
     private String perioadaSemestruCsv;
     private String instantaDisciplinaCsv;
@@ -43,12 +41,12 @@ public class StudentsConfig {
         this.sourceDirectory = sourceDirectory;
     }
 
-    public String getFileNameCsv2() {
-        return fileNameCsv2;
+    public String getNoteCsv() {
+        return noteCsv;
     }
 
-    public void setFileNameCsv2(String fileNameCsv2) {
-        this.fileNameCsv2 = fileNameCsv2;
+    public void setNoteCsv(String noteCsv) {
+        this.noteCsv = noteCsv;
     }
 
     public String getFileNameCSV3() {
@@ -58,7 +56,6 @@ public class StudentsConfig {
     public void setFileNameCSV3(String fileNameCSV3) {
         this.fileNameCSV3 = fileNameCSV3;
     }
-
 
     public String getInstantaDisciplinaCsv() {
         return instantaDisciplinaCsv;

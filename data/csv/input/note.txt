@@ -1,0 +1,4 @@
+id_nota,tip_nota
+1,activitate
+2,finala
+3,examen

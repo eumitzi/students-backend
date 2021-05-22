@@ -3,8 +3,6 @@ package com.students.studentsbackend;
 import com.students.studentsbackend.config.StudentsConfig;
 import com.students.studentsbackend.domain.*;
 import com.students.studentsbackend.processor.*;
-import org.apache.camel.Exchange;
-import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.dataformat.bindy.csv.BindyCsvDataFormat;
 import org.apache.camel.spi.DataFormat;
@@ -15,34 +13,35 @@ import java.text.MessageFormat;
 @Component
 public class StudentsRoute extends RouteBuilder {
 
-  private InsertPrimulCsvProcessor insertPrimulCsvProcessor;
+  private final InsertPrimulCsvProcessor insertPrimulCsvProcessor;
   private StudentsConfig studentsConfig;
-  private InsertAlDoileaCsvProcessor insertAlDoileaCsvProcessor;
-  private InsertAlTreileaCsvProcessor insertAlTreileaCsvProcessor;
-  private InsertIntoPerioadaSemestruProcessor insertIntoPerioadaSemestruProcessor;
-  private InsertIntoInstantaDisciplinaCsvProcessor insertIntoInstantaDisciplinaCsvProcessor;
-  private InsertStudentProfesorProcessor insertStudentProfesorProcessor;
+  private final InsertAlTreileaCsvProcessor insertAlTreileaCsvProcessor;
+  private final InsertIntoPerioadaSemestruProcessor insertIntoPerioadaSemestruProcessor;
+  private final InsertIntoInstantaDisciplinaCsvProcessor insertIntoInstantaDisciplinaCsvProcessor;
+  private final InsertStudentProfesorProcessor insertStudentProfesorProcessor;
+  private final InsertIntoNotaProcessor insertIntoNotaProcessor;
 
   private static final DataFormat bindyCsv2 = new BindyCsvDataFormat(AlDoileaCsv.class);
   private static final DataFormat bindyCsv3 = new BindyCsvDataFormat(AlTreileaCSV.class);
   private static final DataFormat bindy = new BindyCsvDataFormat(PrimulCSV.class);
+  private static final DataFormat notaCsvBindy = new BindyCsvDataFormat(NotaCSV.class);
   private static final DataFormat perioadaSemestruBindy =
       new BindyCsvDataFormat(PerioadaSemestruCsv.class);
   private static final DataFormat instantaDisciplinaBindy =
-          new BindyCsvDataFormat(InstantaDisciplinaCsv.class);
+      new BindyCsvDataFormat(InstantaDisciplinaCsv.class);
   private static final DataFormat studentProfesorBindy =
       new BindyCsvDataFormat(StudentProfesorCSV.class);
 
   public StudentsRoute(
       InsertPrimulCsvProcessor insertPrimulCsvProcessor,
-      InsertAlDoileaCsvProcessor insertAlDoileaCsvProcessor,
+      InsertIntoNotaProcessor insertIntoNotaProcessor,
       InsertAlTreileaCsvProcessor insertAlTreileaCsvProcessor,
       InsertIntoPerioadaSemestruProcessor insertIntoPerioadaSemestruProcessor,
       InsertIntoInstantaDisciplinaCsvProcessor insertIntoInstantaDisciplinaCsvProcessor,
       InsertStudentProfesorProcessor insertStudentProfesorProcessor,
       StudentsConfig studentsConfig) {
     this.insertPrimulCsvProcessor = insertPrimulCsvProcessor;
-    this.insertAlDoileaCsvProcessor = insertAlDoileaCsvProcessor;
+    this.insertIntoNotaProcessor = insertIntoNotaProcessor;
     this.insertAlTreileaCsvProcessor = insertAlTreileaCsvProcessor;
     this.insertIntoPerioadaSemestruProcessor = insertIntoPerioadaSemestruProcessor;
     this.insertIntoInstantaDisciplinaCsvProcessor = insertIntoInstantaDisciplinaCsvProcessor;
@@ -57,10 +56,10 @@ public class StudentsRoute extends RouteBuilder {
         MessageFormat.format(
             "file:{0}?fileName={1}&noop=true",
             studentsConfig.getSourceDirectory(), studentsConfig.getFileName());
-    String sourceUriAlDoileaCsv =
+    String sourceUriNotaCsv =
         MessageFormat.format(
             "file:{0}?fileName={1}&noop=true",
-            studentsConfig.getSourceDirectory(), studentsConfig.getFileNameCsv2());
+            studentsConfig.getSourceDirectory(), studentsConfig.getNoteCsv());
     String sourceUriAlTreileaCsv =
         MessageFormat.format(
             "file:{0}?fileName={1}&noop=true",
@@ -72,14 +71,20 @@ public class StudentsRoute extends RouteBuilder {
             studentsConfig.getSourceDirectory(), studentsConfig.getPerioadaSemestruCsv());
 
     String sourceUriInstantaDisciplinaCSV =
-            MessageFormat.format(
-                    "file:{0}?fileName={1}&noop=true&initialDelay=100000",
-                    studentsConfig.getSourceDirectory(), studentsConfig.getInstantaDisciplinaCsv());
+        MessageFormat.format(
+            "file:{0}?fileName={1}&noop=true&initialDelay=100000",
+            studentsConfig.getSourceDirectory(), studentsConfig.getInstantaDisciplinaCsv());
 
     String sourceUriStudentProfesorCsv =
         MessageFormat.format(
             "file:{0}?fileName={1}&noop=true&initialDelay=60000",
             studentsConfig.getSourceDirectory(), studentsConfig.getStudentProfesorCsv());
+
+    from(sourceUriNotaCsv)
+        .unmarshal(notaCsvBindy)
+        .process(insertIntoNotaProcessor)
+        .to("log:Informatiile despre note au fost inserate cu succes!")
+        .end();
 
     from(sourceUriPrimulCsv)
         .unmarshal(bindy)
@@ -106,9 +111,9 @@ public class StudentsRoute extends RouteBuilder {
         .end();
 
     from(sourceUriInstantaDisciplinaCSV)
-            .unmarshal(instantaDisciplinaBindy)
-            .process(insertIntoInstantaDisciplinaCsvProcessor)
-            .to("log:Informatiile despre INSTANTA DISCIPLINA inserate cu succes!")
-            .end();
+        .unmarshal(instantaDisciplinaBindy)
+        .process(insertIntoInstantaDisciplinaCsvProcessor)
+        .to("log:Informatiile despre INSTANTA DISCIPLINA inserate cu succes!")
+        .end();
   }
 }
