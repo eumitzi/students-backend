@@ -32,6 +32,9 @@ public class StudentsConstants {
   public static String INSERT_INTO_PROFESORI =
       "INSERT INTO profesori(id_profesori, id_persoana) VALUES (?,?)";
 
+  public static String INSERT_INTO_NOTE =
+          "INSERT INTO note(id_nota, tip_nota) VALUES (?,?)";
+
   public static String INSERT_INTO_STUDENTI =
       "INSERT INTO studenti(id_student, nr_matricol, id_persoana) VALUES (?,?,?)";
 }
